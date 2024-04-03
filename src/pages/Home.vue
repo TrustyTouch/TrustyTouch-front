@@ -72,5 +72,9 @@ let rules = [
     background: none;
     color: #2b262d;
     opacity: 5;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
   }
+  
 </style>
