@@ -39,6 +39,7 @@ let rules = [
               label="Nom d'utilisateur"
             ></v-text-field>
             <v-text-field
+              type="password"
               v-model="password"
               :rules="rules"
               label="Mot de passe"
