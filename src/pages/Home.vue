@@ -1,15 +1,13 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import {
-  useRouter
-}
-from "vue-router"
+import { useRouter } from "vue-router"
+
 const router = useRouter();
-function creation(){
-  router.push({name:"homenc"})
+function creation() {
+  router.push({ name: "homenc" })
 }
-function connexion(){
-  router.push({name:"category"})
+function connexion() {
+  router.push({ name: "category" })
 }
 
 const firstName = ref("")
@@ -27,54 +25,34 @@ let rules = [
     <v-col cols="12" md="6">
       <v-img width="1000" src="/assets/TrustyTouch.png"></v-img>
     </v-col>
-    <v-col class="d-flex flex-column justify-center" cols="12" md="6">
+    <v-col class="d-flex flex-column justify-center align-center" cols="12" md="6">
+      <v-form class="d-flex flex-column justify-center gap w-75" @submit.prevent>
         <h2>Bonjour !</h2>
         <p>Connectez-vous pour découvrir toutes nos fonctionnalités.</p>
-        <br>  
-        <v-sheet class="mx-auto" width="300">
-          <v-form @submit.prevent>
-            <v-text-field
-              v-model="firstName"
-              :rules="rules"
-              label="Nom d'utilisateur"
-            ></v-text-field>
-            <v-text-field
-              type="password"
-              v-model="password"
-              :rules="rules"
-              label="Mot de passe"
-            ></v-text-field>
-            <v-btn class="mt-2" type="submit" block @click="connexion()">Se connecter</v-btn>
-          </v-form>
-        </v-sheet>
-        <br>
+        <v-text-field v-model="firstName" :rules="rules" label="Nom d'utilisateur"></v-text-field>
+        <v-text-field type="password" v-model="password" :rules="rules" label="Mot de passe"></v-text-field>
+        <v-btn class="mt-2" type="submit" block @click="connexion()">Se connecter</v-btn>
         <p>Envie de nous rejoindre ?</p>
         <p class="link" @click="creation()">Créer un compte</p>
+      </v-form>
     </v-col>
   </v-row>
 </template>
 
 <style scoped>
-  .link{
-    color: #647295;
-    font-weight: bold;
-    text-decoration: underline;
-  }
-  .link:hover{
-    cursor: pointer;
-  }
-  .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .v-sheet{
-    background: none;
-    color: #2b262d;
-    opacity: 5;
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
-  }
-  
+.link {
+  color: #647295;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.link:hover {
+  cursor: pointer;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>

@@ -39,6 +39,10 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.gap {
+  gap: 12px;
+}
+
 #app {
   margin: 0 auto;
   padding: 2rem;
