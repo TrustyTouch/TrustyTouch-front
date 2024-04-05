@@ -1,18 +1,70 @@
 <script setup lang="ts">
+import { ref } from "vue"
+import { useRouter } from "vue-router"
 
+const menunotif = ref<boolean>(false)
+const menucompte = ref<boolean>(false)
+const router = useRouter()
+
+function accueil() {
+  router.push({ name: "category" })
+}
+
+function home() {
+    router.push({ name: "home" })
+}
+
+interface Notif {
+    personne: string;
+    titre: string;
+}
+
+const notifs = ref<Notif[]>([
+    {personne: "Prestataire 1", titre: "Nom du service..."},
+    {personne: "Prestataire 2", titre: "Nom du service..."},
+    {personne: "Prestataire 3", titre: "Nom du service..."}
+])
 </script>
 
 <template>
     <v-app-bar>
-        <v-row class="d-flex justify-end">
+        <v-row class="d-flex pa-2">
+            <v-col>
+                <v-img width="50" src="/assets/TrustyTouch.png" @click="accueil()"></v-img>
+            </v-col>
             <v-col cols="auto">
                 <v-btn icon="mdi-plus-box"></v-btn>
-            </v-col>
-            <v-col cols="auto">
                 <v-btn icon="mdi-message-text"></v-btn>
-            </v-col>
-            <v-col cols="auto">
-                <v-btn icon="mdi-bell"></v-btn>
+                <v-menu v-model="menunotif" :close-on-content-click="false" >
+                    <template v-slot:activator="{ props }">
+                        <v-btn v-bind="props" icon="mdi-bell" ></v-btn>
+                    </template>
+                    <v-card min-width="300">
+                        <v-list>
+                            <div v-for="notif in notifs" :key="notif.titre">
+                                <v-list-item
+                                    :subtitle="notif.titre"
+                                    :title="notif.personne"
+                                >
+                                </v-list-item>
+                            </div>
+                        </v-list>
+                    </v-card>
+                </v-menu>
+                <v-menu v-model="menucompte" :close-on-content-click="false" >
+                    <template v-slot:activator="{ props  }">
+                        <v-btn v-bind="props" icon="mdi-account" ></v-btn>
+                    </template>
+                    <v-card>
+                        <v-list>
+                            <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-account">PROFIL</v-btn><br>
+                            <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-check-circle">MES SERVICES</v-btn><br>
+                            <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-triangle">STATISTIQUES</v-btn><br>
+                            <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-menu">ADMINISTRATION</v-btn><br>
+                            <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-logout" @click="home()">SE DECONNECTER</v-btn>
+                        </v-list>
+                    </v-card>
+                </v-menu>
             </v-col>
         </v-row>
     </v-app-bar>
