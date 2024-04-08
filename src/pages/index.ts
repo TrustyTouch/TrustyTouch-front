@@ -16,6 +16,11 @@ const routes : RouteRecordRaw[] = [
         path: '/Category',
         component: () => import("./Category.vue")
     },
+    {
+        name: 'stat',
+        path: '/Statistic',
+        component: () => import("./Statistic.vue")
+    }
 ];
 
 export default routes;
