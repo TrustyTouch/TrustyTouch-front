@@ -24,14 +24,13 @@ let rules = [
 
 <template>
   <v-row>
-    <v-col cols="12" md="6">
-      <v-img width="1000" src="/assets/TrustyTouch.png"></v-img>
+    <v-col class="d-flex flex-column justify-center align-center" cols="12" md="6">
+      <v-img width="300" src="/assets/TrustyTouch.png"></v-img>
     </v-col>
     <v-col class="d-flex flex-column justify-center align-center" cols="12" md="6">
       <v-form class="d-flex flex-column justify-center gap w-75" @submit.prevent>
         <h2>Créez un compte</h2>
-        <p>Bénéficiez d’une expérience personnalisée avec du contenu en lien avec votre activité et vos centres
-          d’intérêt sur notre service.</p>
+        <p>Bénéficiez d’une expérience personnalisée avec du contenu en lien avec votre activité et vos centres d’intérêt sur notre service.</p>
         <v-row>
           <v-radio-group class="d-flex justify-center" v-model="selectedOption" inline>
             <v-radio label="Demandeur" value="one"></v-radio>
