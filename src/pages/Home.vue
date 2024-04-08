@@ -22,11 +22,11 @@ let rules = [
 
 <template>
   <v-row>
-    <v-col cols="12" md="6">
-      <v-img width="1000" src="/assets/TrustyTouch.png"></v-img>
+    <v-col class="d-flex flex-column justify-center align-center" cols="12" md="6">
+      <v-img width="300" src="/assets/TrustyTouch.png"></v-img>
     </v-col>
     <v-col class="d-flex flex-column justify-center align-center" cols="12" md="6">
-      <v-form class="d-flex flex-column justify-center gap w-75" @submit.prevent>
+      <v-form class="d-flex flex-column justify-center gap w-100" @submit.prevent>
         <h2>Bonjour !</h2>
         <p>Connectez-vous pour découvrir toutes nos fonctionnalités.</p>
         <v-text-field v-model="firstName" :rules="rules" label="Nom d'utilisateur"></v-text-field>
