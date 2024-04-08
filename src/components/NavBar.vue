@@ -14,6 +14,10 @@ function home() {
     router.push({ name: "home" })
 }
 
+function stat() {
+    router.push({ name: "stat" })
+}
+
 interface Notif {
     personne: string;
     titre: string;
@@ -59,7 +63,7 @@ const notifs = ref<Notif[]>([
                         <v-list>
                             <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-account">PROFIL</v-btn><br>
                             <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-check-circle">MES SERVICES</v-btn><br>
-                            <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-triangle">STATISTIQUES</v-btn><br>
+                            <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-triangle" @click="stat()">STATISTIQUES</v-btn><br>
                             <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-menu">ADMINISTRATION</v-btn><br>
                             <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-logout" @click="home()">SE DECONNECTER</v-btn>
                         </v-list>
