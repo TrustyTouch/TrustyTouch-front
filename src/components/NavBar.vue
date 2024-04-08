@@ -18,6 +18,26 @@ function stat() {
     router.push({ name: "stat" })
 }
 
+function profil() {
+    router.push({ name: "profil" })
+}
+
+function myservices() {
+    router.push({ name: "myservices" })
+}
+
+function admin() {
+    router.push({ name: "serviceedit" })
+}
+
+function createservice() {
+    router.push({ name: "createservice" })
+}
+
+function discussions() {
+    router.push({ name: "discussions" })
+}
+
 interface Notif {
     personne: string;
     titre: string;
@@ -37,8 +57,8 @@ const notifs = ref<Notif[]>([
                 <v-img width="50" src="/assets/TrustyTouch.png" @click="accueil()"></v-img>
             </v-col>
             <v-col cols="auto">
-                <v-btn icon="mdi-plus-box"></v-btn>
-                <v-btn icon="mdi-message-text"></v-btn>
+                <v-btn icon="mdi-plus-box" @click="createservice()"></v-btn>
+                <v-btn icon="mdi-message-text" @click="discussions()"></v-btn>
                 <v-menu v-model="menunotif" :close-on-content-click="false" >
                     <template v-slot:activator="{ props }">
                         <v-btn v-bind="props" icon="mdi-bell" ></v-btn>
@@ -61,10 +81,10 @@ const notifs = ref<Notif[]>([
                     </template>
                     <v-card>
                         <v-list>
-                            <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-account">PROFIL</v-btn><br>
-                            <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-check-circle">MES SERVICES</v-btn><br>
+                            <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-account" @click="profil()">PROFIL</v-btn><br>
+                            <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-check-circle" @click="myservices()">MES SERVICES</v-btn><br>
                             <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-triangle" @click="stat()">STATISTIQUES</v-btn><br>
-                            <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-menu">ADMINISTRATION</v-btn><br>
+                            <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-menu" @click="admin()">ADMINISTRATION</v-btn><br>
                             <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-logout" @click="home()">SE DECONNECTER</v-btn>
                         </v-list>
                     </v-card>
