@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import NavBar from '../components/NavBar.vue';
 </script>
 
 <template>
-    <NavBar></NavBar>
-    <div class="d-flex flex-column align-center justify-center gap">
+    <div class="d-flex flex-column align-center justify-center gap mt-4">
         <v-card
         text="xxxx"
         title="Nombre d'utilisateurs"

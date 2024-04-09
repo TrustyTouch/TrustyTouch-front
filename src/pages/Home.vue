@@ -21,22 +21,24 @@ let rules = [
 </script>
 
 <template>
-  <v-row class="app">
-    <v-col class="d-flex flex-column justify-center align-center" cols="12" md="6">
-      <v-img width="300" src="/assets/TrustyTouch.png"></v-img>
-    </v-col>
-    <v-col class="d-flex flex-column justify-center align-center" cols="12" md="6">
-      <v-form class="d-flex flex-column justify-center gap w-100" @submit.prevent>
-        <h2>Bonjour !</h2>
-        <p>Connectez-vous pour découvrir toutes nos fonctionnalités.</p>
-        <v-text-field v-model="firstName" :rules="rules" label="Nom d'utilisateur"></v-text-field>
-        <v-text-field type="password" v-model="password" :rules="rules" label="Mot de passe"></v-text-field>
-        <v-btn class="mt-2" type="submit" block @click="connexion()">Se connecter</v-btn>
-        <p>Envie de nous rejoindre ?</p>
-        <p class="link" @click="creation()">Créer un compte</p>
-      </v-form>
-    </v-col>
-  </v-row>
+  <v-container class="d-flex flex-nowrap h-screen">
+    <v-row>
+      <v-col class="d-flex flex-column justify-center align-center" cols="12" md="6">
+        <v-img width="300" src="/assets/TrustyTouch.png"></v-img>
+      </v-col>
+      <v-col class="d-flex flex-column justify-center align-center" cols="12" md="6">
+        <v-form class="d-flex flex-column justify-center gap w-75" @submit.prevent>
+          <h2 class="text-center">Bonjour !</h2>
+          <p class="text-center">Connectez-vous pour découvrir toutes nos fonctionnalités.</p>
+          <v-text-field v-model="firstName" :rules="rules" label="Nom d'utilisateur"></v-text-field>
+          <v-text-field type="password" v-model="password" :rules="rules" label="Mot de passe"></v-text-field>
+          <v-btn class="mt-2" type="submit" block @click="connexion()">Se connecter</v-btn>
+          <p class="text-center">Envie de nous rejoindre ?</p>
+          <p class="link text-center" @click="creation()">Créer un compte</p>
+        </v-form>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <style scoped>
@@ -54,11 +56,5 @@ let rules = [
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.app {
-  margin: auto;
-  padding: 2rem;
-  text-align: center;
 }
 </style>
