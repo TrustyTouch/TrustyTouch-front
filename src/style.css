@@ -26,9 +26,3 @@ h1 {
 #app {
   width: 100vw;
 }
-
-.v-application__wrap {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}

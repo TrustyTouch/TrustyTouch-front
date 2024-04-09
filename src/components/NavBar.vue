@@ -52,7 +52,7 @@ const notifs = ref<Notif[]>([
 
 <template>
     <v-app-bar>
-        <v-row class="d-flex pa-2">
+        <v-row>
             <v-col>
                 <v-img width="50" src="/assets/TrustyTouch.png" @click="accueil()"></v-img>
             </v-col>
