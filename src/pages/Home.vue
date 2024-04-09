@@ -21,7 +21,7 @@ let rules = [
 </script>
 
 <template>
-  <v-row>
+  <v-row class="app">
     <v-col class="d-flex flex-column justify-center align-center" cols="12" md="6">
       <v-img width="300" src="/assets/TrustyTouch.png"></v-img>
     </v-col>
@@ -54,5 +54,11 @@ let rules = [
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.app {
+  margin: auto;
+  padding: 2rem;
+  text-align: center;
 }
 </style>
