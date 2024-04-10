@@ -15,19 +15,19 @@ const biographie = ref("")
         <v-row>
             <v-col class="d-flex" cols="12" md="6">
                 <p>Nom d'utilisateur</p>
-                <v-text-field hide-details class="ml-4" v-model="firstName" label="Nom d'utilisateur"></v-text-field>
+                <v-text-field hide-details class="ml-7" v-model="firstName" label="Nom d'utilisateur"></v-text-field>
             </v-col>
         </v-row>
         <v-row>
             <v-col class="d-flex" cols="12" md="6">
                 <p>Code de parrainage</p>
-                <v-text-field hide-details class="ml-4" v-model="code" label="Code de parrainage"></v-text-field>
+                <v-text-field hide-details class="ml-3" v-model="code" label="Code de parrainage"></v-text-field>
             </v-col>
         </v-row>
         <v-row>
             <v-col class="d-flex" cols="12" md="12">
                 <p>Biographie</p>
-                <v-text-field hide-details class="ml-4" v-model="biographie" label="Biographie"></v-text-field>
+                <v-text-field hide-details class="ml-16" v-model="biographie" label="Biographie"></v-text-field>
             </v-col>
         </v-row>
         <v-row>
