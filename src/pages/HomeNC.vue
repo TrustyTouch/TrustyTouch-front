@@ -13,7 +13,7 @@ function connexion() {
 const selectedOption = ref("one")
 const firstName = ref("")
 const password = ref("")
-const parrainage = ref("")
+const parrainage = ref(0)
 let rules = [
   (value: string) => {
     if (value) return true;
@@ -40,7 +40,7 @@ let rules = [
           </v-row>
           <v-text-field v-model="firstName" :rules="rules" label="Nom d'utilisateur"></v-text-field>
           <v-text-field type="password" v-model="password" :rules="rules" label="Mot de passe"></v-text-field>
-          <v-text-field v-model="parrainage" label="Code de parrainage"></v-text-field>
+          <v-text-field v-model.number="parrainage" label="Code de parrainage" type="number" max="9999" min="0"></v-text-field>
           <v-btn class="mt-2" type="submit" block @click="connexion()">Créer un compte</v-btn>
           <p class="text-center">Vous avez déjà un compte ?</p>
           <p class="link text-center" @click="enregistrer()">Me connecter</p>
