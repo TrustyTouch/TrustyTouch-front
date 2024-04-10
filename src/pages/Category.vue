@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CategoryCard from '../components/CategoryCard.vue';
 </script>
 
 <template>
@@ -9,4 +10,6 @@
     label="Barre de recherche"
     variant="solo"
     single-line />
+
+    <CategoryCard/>
 </template>
