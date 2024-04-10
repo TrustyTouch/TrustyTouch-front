@@ -26,7 +26,7 @@ const description = ref("")
                 <v-file-input
                     class="ml-4"
                     accept="image/png, image/jpeg, image/bmp, image/jpeg, image/webp, image/svg"
-                    label="Photo du service"
+                    label="Changer l'image du service"
                     placeholder="Changer l'image du service"
                     prepend-icon="mdi-arrow-left"
                 ></v-file-input>
