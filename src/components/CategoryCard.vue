@@ -15,14 +15,14 @@ interface Video {
 }
 
 const categories = ref<Video[]>([
-    { title: "Electricien", image:"https://ecometiers.com/wp-content/uploads/2023/07/travaux-electricien.jpg", id:1 },
-    { title: "Vidéos", image:"https://123-metier.fr/wp-content/uploads/2023/02/Videaste.jpg", id:2 },
-    { title: "Travaux publics", image:"https://www.hautsdefrance.fr/app/uploads/2022/09/Travaux-publics.jpg", id:3 },
-    { title: "Divertissement", image:"https://cdn.sortiraparis.com/images/80/1467/478202-le-royaume-des-enfants-a-cergy-draveil-et-jablines.jpg", id:4 },
-    { title: "Immobilier", image:"https://renoverpourgagner.com/wp-content/uploads/2023/07/AdobeStock_603805220.jpeg", id:5 },
-    { title: "Santé", image:"https://www.iledefrance.fr/sites/default/files/styles/hub_exposition_banner_desktop/public/medias/istock-photobyphotoboy.jpg.webp?itok=_2VuK8a4", id:6 },
-    { title: "Agricole", image:"https://f.hellowork.com/seo/domaine/agricole.jpeg", id:7 },
-    { title: "Nettoyage", image:"https://www.delcourt.fr/img/cms/visuel-article-techniques-entretien-lavage-sols-Delcourt-fr-min.jpg", id:8 }
+    { title: "Electricien", image:"/assets/Electricien.jpg", id:1 },
+    { title: "Vidéos", image:"/assets/Videos.jpg", id:2 },
+    { title: "Travaux publics", image:"/assets/Travaux_publics.jpg", id:3 },
+    { title: "Divertissement", image:"/assets/Divertissement.jpg", id:4 },
+    { title: "Immobilier", image:"/assets/Immobilier.jpeg", id:5 },
+    { title: "Santé", image:"/assets/Sante.webp", id:6 },
+    { title: "Agricole", image:"/assets/Agricole.jpeg", id:7 },
+    { title: "Nettoyage", image:"/assets/Nettoyage.jpg", id:8 }
 ]);
 </script>
 

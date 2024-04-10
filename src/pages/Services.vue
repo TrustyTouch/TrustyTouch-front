@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ServiceCard from '../components/ServiceCard.vue';
 </script>
 
 <template>
@@ -12,4 +13,5 @@
             variant="solo"
             single-line />
     </div>
+    <ServiceCard/>
 </template>
