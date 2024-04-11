@@ -17,7 +17,7 @@ const description = ref("")
 
     <v-form class="mt-4 mx-4" @submit.prevent>
         <v-row>
-            <v-col class="d-flex align-center" cols="12" md="10">
+            <v-col class="d-flex align-center" cols="12" md="6">
                 <v-img 
                     :src="image"
                     max-width="300"
@@ -33,19 +33,19 @@ const description = ref("")
             </v-col>
         </v-row>
         <v-row>
-            <v-col class="d-flex align-center" cols="12" md="6">
+            <v-col class="d-flex align-center" cols="12" md="4">
                 <p>Nom d'utilisateur</p>
                 <v-text-field hide-details class="ml-12" v-model="firstName" label="Nom d'utilisateur"></v-text-field>
             </v-col>
         </v-row>
         <v-row>
-            <v-col class="d-flex align-center" cols="12" md="6">
+            <v-col class="d-flex align-center" cols="12" md="4">
                 <p>Prix du service (€)</p>
                 <v-text-field hide-details class="ml-10" v-model.number="prix" min="0" label="Prix du service"></v-text-field>
             </v-col>
         </v-row>
         <v-row>
-            <v-col class="d-flex align-center" cols="12" md="6">
+            <v-col class="d-flex align-center" cols="12" md="4">
                 <p>Catégorie du service</p>
                 <v-combobox
                     class="ml-7"
@@ -58,7 +58,7 @@ const description = ref("")
             </v-col>
         </v-row>
         <v-row>
-            <v-col class="d-flex align-center" cols="12" md="6">
+            <v-col class="d-flex align-center" cols="12" md="4">
                 <p>Titre du service</p>
                 <v-text-field hide-details class="ml-15" v-model="titre" label="Titre du service"></v-text-field>
             </v-col>
