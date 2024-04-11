@@ -1,16 +1,25 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { useRouter } from "vue-router"
+import AuthService from "../service/AuthService"
 
 const router = useRouter()
 function enregistrer() {
   router.push({ name: "home" })
 }
-function connexion() {
-  router.push({ name: "category" })
+
+const authService = new AuthService();
+
+function registerUser() {
+  authService.register(firstName.value,password.value,selectedOption.value,parrainage.value)
+    .then(() => {
+      enregistrer()
+    }).catch(() => {
+      console.log("erreur")
+    })
 }
 
-const selectedOption = ref("one")
+const selectedOption = ref(1)
 const firstName = ref("")
 const password = ref("")
 const parrainage = ref(0)
@@ -34,14 +43,14 @@ let rules = [
           <p class="text-center">Bénéficiez d’une expérience personnalisée avec du contenu en lien avec votre activité et vos centres d’intérêt sur notre service.</p>
           <v-row>
             <v-radio-group class="d-flex justify-center" v-model="selectedOption" inline>
-              <v-radio label="Demandeur" value="one"></v-radio>
-              <v-radio label="Prestataire" value="two"></v-radio>
+              <v-radio label="Demandeur" :value="1"></v-radio>
+              <v-radio label="Prestataire" :value="2"></v-radio>
             </v-radio-group>
           </v-row>
           <v-text-field v-model="firstName" :rules="rules" label="Nom d'utilisateur"></v-text-field>
           <v-text-field type="password" v-model="password" :rules="rules" label="Mot de passe"></v-text-field>
           <v-text-field v-model.number="parrainage" label="Code de parrainage" type="number" max="9999" min="0"></v-text-field>
-          <v-btn class="mt-2" type="submit" block @click="connexion()">Créer un compte</v-btn>
+          <v-btn class="mt-2" type="submit" block @click="registerUser()">Créer un compte</v-btn>
           <p class="text-center">Vous avez déjà un compte ?</p>
           <p class="link text-center" @click="enregistrer()">Me connecter</p>
         </v-form>
