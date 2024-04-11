@@ -34,12 +34,6 @@ const description = ref("")
         </v-row>
         <v-row>
             <v-col class="d-flex align-center" cols="12" md="4">
-                <p>Nom d'utilisateur</p>
-                <v-text-field hide-details class="ml-12" v-model="firstName" label="Nom d'utilisateur"></v-text-field>
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col class="d-flex align-center" cols="12" md="4">
                 <p>Prix du service (€)</p>
                 <v-text-field hide-details class="ml-10" v-model.number="prix" min="0" label="Prix du service"></v-text-field>
             </v-col>

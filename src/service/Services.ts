@@ -54,4 +54,20 @@ export default class {
             return await res.json()
         })
     }
+    public getMyServices() : Promise<any>
+    {
+        return fetch("http://localhost:5000/get_my_services", {
+            method:"GET",
+            headers:{
+                'Content-type': 'application/json',
+                'Authorization':  "Bearer " + (localStorage.getItem("accessToken")||""),
+                'creditential': 'include'
+            }
+        }).then(async (res) => {
+            if (!res.ok) {
+                throw new Error("Impossible de trouver des services")
+            }
+            return await res.json()
+        })
+    }
 }
