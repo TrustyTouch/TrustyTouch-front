@@ -4,8 +4,8 @@ import { useRouter } from "vue-router"
 
 const router = useRouter()
 
-function discuss() {
-  router.push({ name: "discussing" })
+function pay() {
+  router.push({ name: "payment" })
 }
 
 const image = "/assets/Videos.jpg"
@@ -63,7 +63,7 @@ const description = ref("Lorem ipsum dolor sit amet consectetur adipisicing elit
         </v-row>
         <v-row>
             <v-col class="d-flex justify-center" cols="12" md="12">
-                <v-btn @click="discuss()">Contacter</v-btn>
+                <v-btn @click="pay()">Choisir</v-btn>
             </v-col>
         </v-row>
     </v-form>

@@ -8,7 +8,7 @@ function service() {
   router.push({ name: "service" })
 }
 
-interface Video {
+interface Cat {
     title: string;
     image: string;
     id: number;
@@ -17,7 +17,7 @@ interface Video {
     note: string;
 }
 
-const categories = ref<Video[]>([
+const categories = ref<Cat[]>([
     { title: "Electricien", image:"/assets/Electricien.jpg", id:1, avatar: "/assets/AVATARTEST.webp", personne: "Jean-Paul", note: "4" },
     { title: "Vidéos", image:"/assets/Videos.jpg", id:2, avatar: "/assets/AVATARTEST.webp", personne: "Edouard", note: "4" },
     { title: "Travaux publics", image:"/assets/Travaux_publics.jpg", id:3, avatar: "/assets/AVATARTEST.webp", personne: "Fabrice", note: "4" },

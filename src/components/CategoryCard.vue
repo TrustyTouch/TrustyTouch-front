@@ -8,13 +8,13 @@ function service() {
   router.push({ name: "services" })
 }
 
-interface Video {
+interface Category {
     title: string;
     image: string;
     id: number;
 }
 
-const categories = ref<Video[]>([
+const categories = ref<Category[]>([
     { title: "Electricien", image:"/assets/Electricien.jpg", id:1 },
     { title: "Vidéos", image:"/assets/Videos.jpg", id:2 },
     { title: "Travaux publics", image:"/assets/Travaux_publics.jpg", id:3 },

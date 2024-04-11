@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import MyServiceCard from '../components/MyServiceCard.vue';
+import Progress from '../components/Progress.vue';
 </script>
 
 <template>
@@ -7,5 +7,5 @@ import MyServiceCard from '../components/MyServiceCard.vue';
         <v-btn variant="plain" icon="mdi-arrow-left" @click="$router.go(-1)" />
         <h1 class="w-100 text-center">Mes Services</h1>
     </div>
-    <MyServiceCard/>
+    <Progress></Progress>
 </template>

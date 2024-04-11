@@ -27,19 +27,9 @@ const routes : RouteRecordRaw[] = [
         component: () => import("./CreateService.vue")
     },
     {
-        name: 'discussing',
-        path: '/Discussing',
-        component: () => import("./Discussing.vue")
-    },
-    {
-        name: 'discussions',
-        path: '/Discussions',
-        component: () => import("./Discussions.vue")
-    },
-    {
-        name: 'myservices',
-        path: '/MyServices',
-        component: () => import("./MyServices.vue")
+        name: 'mypresta',
+        path: '/MyPrestation',
+        component: () => import("./MyPrestation.vue")
     },
     {
         name: 'payment',
@@ -54,7 +44,7 @@ const routes : RouteRecordRaw[] = [
     {
         name: 'progressservices',
         path: '/ProgressServices',
-        component: () => import("./ProgressServices.vue")
+        component: () => import("./MyService.vue")
     },
     {
         name: 'service',
