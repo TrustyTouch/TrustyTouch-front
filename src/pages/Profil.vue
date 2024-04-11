@@ -1,11 +1,39 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, onMounted, ref } from "vue";
+import BackendService from '../service/Users'
+import { useRouter } from "vue-router";
 
 const avatar = "/assets/AVATARTEST.webp"
+const user_id = computed(() => JSON.parse(localStorage.getItem('user') || '{}').id as number)
+
+const router = useRouter()
+const backendService = new BackendService();
+
+onMounted(async () => {
+  const user = await backendService.getUser(user_id.value)
+  firstName.value = user.nom
+  code.value = user.code_parainage
+  biographie.value = user.biographie
+})
 
 const firstName = ref("")
-const code = ref("")
+const code = ref(0)
 const biographie = ref("")
+
+async function updateProfile() {
+  const ok = await backendService.updateUser(user_id.value, firstName.value, biographie.value)
+  if (ok) {
+    router.back()
+  }
+}
+
+async function deleteProfile() {
+  const ok = await backendService.deleteUser(user_id.value)
+  if (ok) {
+    localStorage.clear()
+    router.push({ name: 'home' })
+  }
+}
 </script>
 
 <template>
@@ -25,7 +53,8 @@ const biographie = ref("")
                     accept="image/png, image/jpeg, image/bmp, image/jpeg, image/webp, image/svg"
                     label="Changer l'image du profil"
                     placeholder="Changer l'image du profil"
-                    prepend-icon="mdi-arrow-left"
+                    prepend-icon=""
+                    prepend-inner-icon="mdi-upload"
                 ></v-file-input>
             </v-col>
         </v-row>
@@ -38,7 +67,7 @@ const biographie = ref("")
         <v-row>
             <v-col class="d-flex" cols="12" md="6">
                 <p>Code de parrainage</p>
-                <v-text-field hide-details class="ml-3" v-model="code" label="Code de parrainage"></v-text-field>
+                <v-text-field readonly hide-details class="ml-3" v-model="code" label="Code de parrainage"></v-text-field>
             </v-col>
         </v-row>
         <v-row>
@@ -49,12 +78,12 @@ const biographie = ref("")
         </v-row>
         <v-row>
             <v-col class="d-flex justify-center" cols="12" md="12">
-                <v-btn type="submit">Enregistrer</v-btn>
+                <v-btn type="submit" @click="updateProfile">Enregistrer</v-btn>
             </v-col>
         </v-row>
         <v-row>
             <v-col class="d-flex justify-center" cols="12" md="12">
-                <v-btn type="submit">Supprimer le compte</v-btn>
+                <v-btn type="submit" @click="deleteProfile">Supprimer le compte</v-btn>
             </v-col>
         </v-row>
     </v-form>

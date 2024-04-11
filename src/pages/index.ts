@@ -53,7 +53,7 @@ const routes : RouteRecordRaw[] = [
     },
     {
         name: 'serviceedit',
-        path: '/ServiceEdit',
+        path: '/ServiceEdit/:service_id',
         component: () => import("./ServiceEdit.vue")
     },
     {
