@@ -1,12 +1,43 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import Services from "../service/Services"
+import { useRouter } from "vue-router"
 
-const firstName = ref("")
+const router = useRouter();
+function back() {
+  router.push({ name: "mypresta" })
+}
+
+const services = new Services();
+
+function createService() {
+  const user = JSON.parse(localStorage.getItem("user")||"") 
+  services.createService(titre.value,description.value,user.id,categorie.value,prix.value)
+    .then(() => {
+      back()
+    }).catch(() => {
+      console.log("erreur")
+    })
+}
+
 const prix = ref(0)
-const categorie = ref()
+const categorie = ref(1)
 const titre = ref("")
 const description = ref("")
+const choix = ref([
+    { title: "Electricien", value:1 },
+    { title: "Vidéos", value:2 },
+    { title: "Travaux publics", value:3 },
+    { title: "Divertissement", value:4 },
+    { title: "Immobilier", value:5 },
+    { title: "Santé", value:6 },
+    { title: "Agricole", value:7 },
+    { title: "Nettoyage", value:8 }
+])
 </script>
+
+
+
 
 <template>
     <div class="d-flex mt-4">
@@ -26,12 +57,6 @@ const description = ref("")
         </v-row>
         <v-row>
             <v-col class="d-flex align-center" cols="12" md="4">
-                <p>Nom d'utilisateur</p>
-                <v-text-field hide-details class="ml-12" v-model="firstName" label="Nom d'utilisateur"></v-text-field>
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col class="d-flex align-center" cols="12" md="4">
                 <p>Prix du service (€)</p>
                 <v-text-field hide-details class="ml-10" v-model.number="prix" min="0" label="Prix du service"></v-text-field>
             </v-col>
@@ -44,8 +69,9 @@ const description = ref("")
                     clearable
                     hide-details
                     v-model="categorie"
+                    :return-object="false"
                     label="Choix de la catégorie"
-                    :items="['Electricien', 'Divertissement', 'Immobilier', 'Nettoyage', 'Santé', 'Travaux publics', 'Vidéos']"
+                    :items="choix"
                 ></v-combobox>
             </v-col>
         </v-row>
@@ -63,7 +89,7 @@ const description = ref("")
         </v-row>
         <v-row>
             <v-col class="d-flex justify-center" cols="12" md="12">
-                <v-btn type="submit">Enregistrer</v-btn>
+                <v-btn type="submit" @Click="createService()">Enregistrer</v-btn>
             </v-col>
         </v-row>
     </v-form>

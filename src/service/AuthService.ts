@@ -19,4 +19,26 @@ export default class {
             return await res.json()
         })
     }
+
+    public login(nom: string,mot_de_passe: string) : Promise<any>
+    {
+        return fetch("http://localhost:5000/login", {
+            method:"POST",
+            body: JSON.stringify({
+                nom,
+                mot_de_passe
+            }), 
+            headers:{
+                'Content-type': 'application/json'
+            }
+        }).then(async (res) => {
+            if (!res.ok) {
+                throw new Error("Impossible de se connecter")
+            }
+            const response = await res.json()
+            localStorage.setItem('accessToken',response.access_token)
+            localStorage.setItem('user',JSON.stringify(response.user))
+        })
+    }
 }
+

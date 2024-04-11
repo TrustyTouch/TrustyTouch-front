@@ -1,19 +1,23 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { useRouter } from "vue-router"
+import { ref, onMounted } from "vue";
+import { useRouter,useRoute } from "vue-router"
+import Services from "../service/Services"
 
-const router = useRouter()
+const router = useRouter();
+const route = useRoute();
+
+const backEndService = new Services();
+const service = ref<any>({});
+
+onMounted(()=>{backEndService.getService(route.params.service_id as unknown as number).then(body=>{
+    service.value = body
+})})
 
 function pay() {
   router.push({ name: "payment" })
 }
 
 const image = "/assets/Videos.jpg"
-const firstName = ref("Test")
-const prix = ref(1000)
-const categorie = ref("Electricien")
-const titre = ref("Tableau electrique")
-const description = ref("Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam earum, est illo quae fugit voluptatum fuga magni hic maiores ipsa, illum, tenetur accusamus cupiditate? Dolorem ad nisi eveniet officia voluptatibus.")
 </script>
 
 <template>
@@ -34,31 +38,31 @@ const description = ref("Lorem ipsum dolor sit amet consectetur adipisicing elit
         <v-row>
             <v-col class="d-flex align-center" cols="12" md="4">
                 <p>Nom d'utilisateur</p>
-                <p class="ml-12">{{ firstName }}</p>
+                <p class="ml-12">{{ service.nom }}</p>
             </v-col>
         </v-row>
         <v-row>
             <v-col class="d-flex align-center" cols="12" md="4">
                 <p>Prix du service (€)</p>
-                <p class="ml-10">{{ prix }} €</p>
+                <p class="ml-10">{{ service.prix }} €</p>
             </v-col>
         </v-row>
         <v-row>
             <v-col class="d-flex align-center" cols="12" md="4">
                 <p>Catégorie du service</p>
-                <p class="ml-7">{{ categorie }}</p>
+                <p class="ml-7">{{ service.categorie }}</p>
             </v-col>
         </v-row>
         <v-row>
             <v-col class="d-flex align-center" cols="12" md="4">
                 <p>Titre du service</p>
-                <p class="ml-15">{{ titre }}</p>
+                <p class="ml-15">{{ service.titre }}</p>
             </v-col>
         </v-row>
         <v-row>
             <v-col class="d-flex align-center" cols="12" md="12">
                 <p>Description du service</p>
-                <p class="ml-4">{{ description }}</p>
+                <p class="ml-4">{{ service.description }}</p>
             </v-col>
         </v-row>
         <v-row>

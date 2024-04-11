@@ -11,6 +11,7 @@ function accueil() {
 }
 
 function home() {
+    localStorage.clear()
     router.push({ name: "home" })
 }
 

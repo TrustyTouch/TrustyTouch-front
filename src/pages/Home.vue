@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router"
+import AuthService from "../service/AuthService"
 
 const router = useRouter();
 function creation() {
@@ -8,6 +9,17 @@ function creation() {
 }
 function connexion() {
   router.push({ name: "category" })
+}
+
+const authService = new AuthService();
+
+function loginUser() {
+  authService.login(firstName.value,password.value)
+    .then(() => {
+      connexion()
+    }).catch(() => {
+      console.log("erreur")
+    })
 }
 
 const firstName = ref("")
@@ -32,7 +44,7 @@ let rules = [
           <p class="text-center">Connectez-vous pour découvrir toutes nos fonctionnalités.</p>
           <v-text-field v-model="firstName" :rules="rules" label="Nom d'utilisateur"></v-text-field>
           <v-text-field type="password" v-model="password" :rules="rules" label="Mot de passe"></v-text-field>
-          <v-btn class="mt-2" type="submit" block @click="connexion()">Se connecter</v-btn>
+          <v-btn class="mt-2" type="submit" block @click="loginUser()">Se connecter</v-btn>
           <p class="text-center">Envie de nous rejoindre ?</p>
           <p class="link text-center" @click="creation()">Créer un compte</p>
         </v-form>

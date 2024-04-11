@@ -4,8 +4,8 @@ import { useRouter } from "vue-router"
 
 const router = useRouter();
 
-function service() {
-  router.push({ name: "services" })
+function service(categorie_id: number) {
+  router.push({ name: "services", params:{categorie_id}})
 }
 
 interface Category {
@@ -35,7 +35,7 @@ const categories = ref<Category[]>([
             >
                 <v-card
                 class="mx-auto"
-                @click="service()"
+                @click="service(category.id)"
                 >
                     <v-img
                         :src="category.image"
