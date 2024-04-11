@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+
+const roles_id = computed(() => JSON.parse(localStorage.getItem('user') || '{}').id_roles as number)
 
 interface Cat {
     title: string;
@@ -65,7 +67,7 @@ const categories = ref<Cat[]>([
                             </v-stepper>
                         </v-col>
                     </v-row>
-                    <div class="d-flex justify-space-between">
+                    <div v-if="roles_id > 1" class="d-flex justify-space-between">
                         <v-btn :elevation="0" @Click="category.step--" icon="mdi-undo" :disabled="category.step===0"/>
                         <v-btn :elevation="0" icon="mdi-delete"/>
                         <v-btn :elevation="0" @Click="category.step++" icon="mdi-redo" :disabled="category.step===2"/>
