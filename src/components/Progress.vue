@@ -66,9 +66,9 @@ const categories = ref<Cat[]>([
                         </v-col>
                     </v-row>
                     <div class="d-flex justify-space-between">
-                        <v-btn @Click="category.step--" prepend-icon="mdi-undo" :disabled="category.step===0"/>
-                        <v-btn prepend-icon="mdi-redo" :disabled="category.step===2"/>
-                        <v-btn @Click="category.step++" prepend-icon="mdi-redo" :disabled="category.step===2"/>
+                        <v-btn :elevation="0" @Click="category.step--" icon="mdi-undo" :disabled="category.step===0"/>
+                        <v-btn :elevation="0" icon="mdi-delete"/>
+                        <v-btn :elevation="0" @Click="category.step++" icon="mdi-redo" :disabled="category.step===2"/>
                     </div>
                 </v-card>
             </v-col>
