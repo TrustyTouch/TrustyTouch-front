@@ -2,6 +2,20 @@
 import { ref, onMounted } from "vue";
 import { useRouter,useRoute } from "vue-router"
 import Services from "../service/Services"
+import Etapes from "../service/Etapes"
+
+const etapes = new Etapes();
+
+function createEtape() {
+  const user = JSON.parse(localStorage.getItem("user")||"") 
+  const serviceId = route.params.service_id as unknown as number;
+  etapes.createEtape(serviceId,user.id,1)
+    .then(() => {
+        pay()
+    }).catch(() => {
+      console.log("erreur")
+    })
+}
 
 const router = useRouter();
 const route = useRoute();
@@ -67,7 +81,7 @@ const image = "/assets/Videos.jpg"
         </v-row>
         <v-row>
             <v-col class="d-flex justify-center" cols="12" md="12">
-                <v-btn @click="pay()">Choisir</v-btn>
+                <v-btn @click="createEtape()">Choisir</v-btn>
             </v-col>
         </v-row>
     </v-form>
