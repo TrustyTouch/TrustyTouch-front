@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { computed, ref, onMounted } from 'vue';
-import Etapes from "../service/Etapes"
+import EtapesService from "../service/Etapes"
 
 const roles_id = computed(() => JSON.parse(localStorage.getItem('user') || '{}').id_roles as number)
-const user_name = computed(() => JSON.parse(localStorage.getItem('user') || '{}').id as number)
+const user_id = computed(() => JSON.parse(localStorage.getItem('user') || '{}').id as number)
 
-const backEndService = new Etapes();
+const etapesService = new EtapesService();
 
-onMounted(()=>{backEndService.getEtape(user_name.value).then(body=>{
+onMounted(()=>{etapesService.getEtape(user_id.value).then(body=>{
     etapes.value = body
 })})
 
@@ -16,21 +16,39 @@ interface Cat {
     id: number;
     avatar: string;
     nom: string;
-    step: number;
+    statut: number;
 }
 
 const etapes = ref<Cat[]>([]);
 
 const avatar = "/assets/AVATARTEST.webp"
 
+function updateEtape(cat: Cat, step: number) {
+    etapesService.updateEtape(user_id.value, step, cat.id)
+        .then(() => {
+            cat.statut = step
+        })
+        .catch(() => {
+            console.log("Impossible d'update l'étape")
+        })
+}
 
+function deleteEtape(cat: Cat, index: number) {
+    etapesService.deleteEtape(cat.id)
+        .then(() => {
+            etapes.value.splice(index, 1)
+        })
+        .catch(() => {
+            console.log("Impossible d'update l'étape")
+        })
+}
 
 </script>
 
 <template>
     <v-container>
         <v-row>
-            <v-col v-for="etape in etapes" cols="12" md="12">
+            <v-col v-for="(etape, index) in etapes" cols="12" md="12">
                 <v-card>
                     <v-card-title>
                         <div class="d-flex align-center">
@@ -47,7 +65,7 @@ const avatar = "/assets/AVATARTEST.webp"
                     </v-card-title>
                     <v-row>
                         <v-col cols="12" md="12">
-                            <v-stepper :elevation="0" :model-value="etape.step">
+                            <v-stepper :elevation="0" :model-value="etape.statut - 1">
                                 <v-stepper-header>
                                     <v-stepper-item
                                         title="Service accepté"
@@ -72,9 +90,9 @@ const avatar = "/assets/AVATARTEST.webp"
                         </v-col>
                     </v-row>
                     <div v-if="roles_id > 1" class="d-flex justify-space-between">
-                        <v-btn :elevation="0" @Click="etape.step--" icon="mdi-undo" :disabled="etape.step===0"/>
-                        <v-btn :elevation="0" icon="mdi-delete"/>
-                        <v-btn :elevation="0" @Click="etape.step++" icon="mdi-redo" :disabled="etape.step===2"/>
+                        <v-btn :elevation="0" @Click="updateEtape(etape, (etape.statut - 1))" icon="mdi-undo" :disabled="etape.statut===1"/>
+                        <v-btn :elevation="0" icon="mdi-delete" @click="deleteEtape(etape, index)"/>
+                        <v-btn :elevation="0" @Click="updateEtape(etape, (etape.statut + 1))" icon="mdi-redo" :disabled="etape.statut===3"/>
                     </div>
                 </v-card>
             </v-col>
