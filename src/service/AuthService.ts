@@ -1,10 +1,11 @@
 export default class {
-    public register(nom: string,mot_de_passe: string,id_roles: number,code_parainage: number) : Promise<any>
+    public register(nom: string, email: string, mot_de_passe: string,id_roles: number,code_parainage: number) : Promise<any>
     {
         return fetch("http://localhost:5000/create_user", {
             method:"POST",
             body: JSON.stringify({
                 nom,
+                email,
                 mot_de_passe,
                 id_roles,
                 code_parainage

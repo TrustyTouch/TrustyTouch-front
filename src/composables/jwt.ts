@@ -7,7 +7,7 @@ type JWTtoken = {
 } & JwtPayload
 
 export function useJWT(){
-    const jwtToken = computed(()=> localStorage.getItem('jwtToken'))
+    const jwtToken = computed(()=> localStorage.getItem('accessToken'))
     const decodedToken = computed(()=> {
         if (jwtToken.value !== null) {
             return jwtDecode<JWTtoken>(jwtToken.value)

@@ -21,6 +21,23 @@ export default class {
             return await res.json()
         })
     }
+
+    public getNbServices(): Promise<any> {
+        return fetch("http://localhost:5000/get_nb_services", {
+            method: "GET",
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': "Bearer " + (localStorage.getItem("accessToken") || ""),
+                'creditential': 'include'
+            }
+        }).then(async (res) => {
+            if (!res.ok) {
+                throw new Error("Impossible de compter les services")
+            }
+            return await res.json()
+        })
+    }
+
     public getServices(id_categorie: number): Promise<any> {
         return fetch("http://localhost:5000/get_services/" + id_categorie, {
             method: "GET",
@@ -36,6 +53,7 @@ export default class {
             return await res.json()
         })
     }
+
     public getService(id_service: number): Promise<any> {
         return fetch("http://localhost:5000/get_service/" + id_service, {
             method: "GET",
@@ -51,6 +69,7 @@ export default class {
             return await res.json()
         })
     }
+
     public getMyServices(): Promise<any> {
         return fetch("http://localhost:5000/get_my_services", {
             method: "GET",

@@ -29,6 +29,36 @@ export default class {
         return await res.json()
     }
 
+    async getNbUser(): Promise<any> {
+        const res = await fetch("http://localhost:5000/get_nb_user", {
+            method: "GET",
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': "Bearer " + (localStorage.getItem("accessToken") || ""),
+                'creditential': 'include'
+            }
+        })
+        if (!res.ok) {
+            throw new Error("Impossible de compter les utilisateurs")
+        }
+        return await res.json()
+    }
+
+    async getNbPresta(): Promise<any> {
+        const res = await fetch("http://localhost:5000/get_nb_presta", {
+            method: "GET",
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': "Bearer " + (localStorage.getItem("accessToken") || ""),
+                'creditential': 'include'
+            }
+        })
+        if (!res.ok) {
+            throw new Error("Impossible de compter les prestataires")
+        }
+        return await res.json()
+    }
+
     async getUsers(id_categorie: number): Promise<User[]> {
         const res = await fetch("http://localhost:5000/get_users/" + id_categorie, {
             method: "GET",

@@ -11,7 +11,7 @@ function enregistrer() {
 const authService = new AuthService();
 
 function registerUser() {
-  authService.register(firstName.value,password.value,selectedOption.value,parrainage.value)
+  authService.register(firstName.value,mailAddress.value,password.value,selectedOption.value,parrainage.value)
     .then(() => {
       enregistrer()
     }).catch(() => {
@@ -20,6 +20,7 @@ function registerUser() {
 }
 
 const selectedOption = ref(1)
+const mailAddress = ref("")
 const firstName = ref("")
 const password = ref("")
 const parrainage = ref(0)
@@ -28,6 +29,10 @@ let rules = [
     if (value) return true;
     return 'Vous devez rentrer une valeur.';
   },
+];
+const emailRules = [
+  (v: string | null) => !!v || 'L\'email est requis',
+  (v: string | null) => /.+@.+\..+/.test(v || '') || 'L\'email doit être valide',
 ];
 </script>
 
@@ -48,6 +53,7 @@ let rules = [
             </v-radio-group>
           </v-row>
           <v-text-field v-model="firstName" :rules="rules" label="Nom d'utilisateur"></v-text-field>
+          <v-text-field v-model="mailAddress" :rules="emailRules" label="Email"></v-text-field>
           <v-text-field type="password" v-model="password" :rules="rules" label="Mot de passe"></v-text-field>
           <v-text-field v-model.number="parrainage" label="Code de parrainage" type="number" max="9999" min="0"></v-text-field>
           <v-btn class="mt-2" type="submit" block @click="registerUser()">Créer un compte</v-btn>
