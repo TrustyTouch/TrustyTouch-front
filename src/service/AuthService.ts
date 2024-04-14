@@ -37,7 +37,6 @@ export default class {
             }
             const response = await res.json()
             localStorage.setItem('accessToken',response.access_token)
-            localStorage.setItem('user',JSON.stringify(response.user))
         })
     }
 }
