@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useRouter,useRoute } from "vue-router"
 import Services from "../service/Services"
 import Etapes from "../service/Etapes"
+import { useJWT } from "../composables/jwt"
 
 const etapes = new Etapes();
 
 function createEtape() {
-  const user = JSON.parse(localStorage.getItem("user")||"") 
+  const user_id = computed(() => useJWT().decodedToken.value?.sub)
   const serviceId = route.params.service_id as unknown as number;
-  etapes.createEtape(serviceId,user.id,1)
+  etapes.createEtape(serviceId,user_id.value!,1)
     .then(() => {
         pay()
     }).catch(() => {
