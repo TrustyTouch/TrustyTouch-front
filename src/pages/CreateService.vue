@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import Services from "../service/Services"
 import { useRouter } from "vue-router"
+import { useJWT } from "../composables/jwt"
 
 const router = useRouter();
 function back() {
@@ -11,8 +12,8 @@ function back() {
 const services = new Services();
 
 function createService() {
-  const user = JSON.parse(localStorage.getItem("user")||"") 
-  services.createService(titre.value,description.value,user.id,categorie.value,prix.value)
+  const user_id = computed(() => useJWT().decodedToken.value?.sub)
+  services.createService(titre.value,description.value,user_id.value!,categorie.value,prix.value)
     .then(() => {
       back()
     }).catch(() => {
@@ -35,9 +36,6 @@ const choix = ref([
     { title: "Nettoyage", value:8 }
 ])
 </script>
-
-
-
 
 <template>
     <div class="d-flex mt-4">

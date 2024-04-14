@@ -2,15 +2,16 @@
 import { computed, onMounted, ref } from "vue";
 import BackendService from '../service/Users'
 import { useRouter } from "vue-router";
+import { useJWT } from "../composables/jwt"
 
 const avatar = "/assets/AVATARTEST.webp"
-const user_id = computed(() => JSON.parse(localStorage.getItem('user') || '{}').id as number)
+const user_id = computed(() => useJWT().decodedToken.value?.sub)
 
 const router = useRouter()
 const backendService = new BackendService();
 
 onMounted(async () => {
-  const user = await backendService.getUser(user_id.value)
+  const user = await backendService.getUser(user_id.value!)
   firstName.value = user.nom
   code.value = user.code_parainage
   biographie.value = user.biographie
@@ -21,14 +22,14 @@ const code = ref(0)
 const biographie = ref("")
 
 async function updateProfile() {
-  const ok = await backendService.updateUser(user_id.value, firstName.value, biographie.value)
+  const ok = await backendService.updateUser(user_id.value!, firstName.value, biographie.value)
   if (ok) {
     router.back()
   }
 }
 
 async function deleteProfile() {
-  const ok = await backendService.deleteUser(user_id.value)
+  const ok = await backendService.deleteUser(user_id.value!)
   if (ok) {
     localStorage.clear()
     router.push({ name: 'home' })
