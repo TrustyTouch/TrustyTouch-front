@@ -20,12 +20,12 @@ export default class {
         })
     }
 
-    public login(nom: string,mot_de_passe: string) : Promise<any>
+    public login(email: string,mot_de_passe: string) : Promise<any>
     {
         return fetch("http://localhost:5000/login", {
             method:"POST",
             body: JSON.stringify({
-                nom,
+                email,
                 mot_de_passe
             }), 
             headers:{

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { computed, ref } from "vue"
 import { useRouter } from "vue-router"
+import { useJWT } from "../composables/jwt"
 
 const menunotif = ref<boolean>(false)
 const menucompte = ref<boolean>(false)
 const router = useRouter()
-
-const roles_id = computed(() => JSON.parse(localStorage.getItem('user') || '{}').id_roles as number)
+const id_role = computed(() => useJWT().decodedToken.value?.id_role)
 
 function accueil() {
   router.push({ name: "category" })
@@ -56,7 +56,7 @@ const notifs = ref<Notif[]>([
                 <v-img width="50" src="/assets/TrustyTouch.png" @click="accueil()"></v-img>
             </v-col>
             <v-col cols="auto">
-                <v-btn v-if="roles_id > 1" icon="mdi-plus-box" @click="createservice()"></v-btn>
+                <v-btn v-if="id_role! > 1" icon="mdi-plus-box" @click="createservice()"></v-btn>
                 <v-menu v-model="menunotif" :close-on-content-click="false" >
                     <template v-slot:activator="{ props }">
                         <v-btn v-bind="props" icon="mdi-bell" ></v-btn>
@@ -81,8 +81,8 @@ const notifs = ref<Notif[]>([
                         <v-list>
                             <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-account" @click="profil()">PROFIL</v-btn><br>
                             <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-check-circle" @click="servedit()">MES SERVICES</v-btn><br>
-                            <v-btn v-if="roles_id > 1" class="w-100 justify-start" variant="plain" prepend-icon="mdi-check-circle" @click="mypresta()">MES PRESTATIONS</v-btn><br>
-                            <v-btn v-if="roles_id > 2" class="w-100 justify-start" variant="plain" prepend-icon="mdi-triangle" @click="stat()">STATISTIQUES</v-btn><br>
+                            <v-btn v-if="id_role! > 1" class="w-100 justify-start" variant="plain" prepend-icon="mdi-check-circle" @click="mypresta()">MES PRESTATIONS</v-btn><br>
+                            <v-btn v-if="id_role! > 2" class="w-100 justify-start" variant="plain" prepend-icon="mdi-triangle" @click="stat()">STATISTIQUES</v-btn><br>
                             <v-btn class="w-100 justify-start" variant="plain" prepend-icon="mdi-logout" @click="home()">SE DECONNECTER</v-btn>
                         </v-list>
                     </v-card>

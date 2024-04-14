@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { computed, ref, onMounted } from 'vue';
 import EtapesService from "../service/Etapes"
+import { useJWT } from "../composables/jwt"
 
-const roles_id = computed(() => JSON.parse(localStorage.getItem('user') || '{}').id_roles as number)
-const user_id = computed(() => JSON.parse(localStorage.getItem('user') || '{}').id as number)
-
+const jwt = useJWT()
+const id_role = computed(() => jwt.decodedToken.value?.id_role)
+const user_id = computed(() => jwt.decodedToken.value?.sub)
 const etapesService = new EtapesService();
 
-onMounted(()=>{etapesService.getEtape(user_id.value).then(body=>{
+onMounted(()=>{etapesService.getEtape(user_id.value!).then(body=>{
     etapes.value = body
 })})
 
@@ -24,7 +25,7 @@ const etapes = ref<Cat[]>([]);
 const avatar = "/assets/AVATARTEST.webp"
 
 function updateEtape(cat: Cat, step: number) {
-    etapesService.updateEtape(user_id.value, step, cat.id)
+    etapesService.updateEtape(user_id.value!, step, cat.id)
         .then(() => {
             cat.statut = step
         })
@@ -89,7 +90,7 @@ function deleteEtape(cat: Cat, index: number) {
                             </v-stepper>
                         </v-col>
                     </v-row>
-                    <div v-if="roles_id > 1" class="d-flex justify-space-between">
+                    <div v-if="id_role! > 1" class="d-flex justify-space-between">
                         <v-btn :elevation="0" @Click="updateEtape(etape, (etape.statut - 1))" icon="mdi-undo" :disabled="etape.statut===1"/>
                         <v-btn :elevation="0" icon="mdi-delete" @click="deleteEtape(etape, index)"/>
                         <v-btn :elevation="0" @Click="updateEtape(etape, (etape.statut + 1))" icon="mdi-redo" :disabled="etape.statut===3"/>
