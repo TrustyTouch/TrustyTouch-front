@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { useRouter } from "vue-router"
+import { toast } from "vue3-toastify"
 import AuthService from "../service/AuthService"
 
 const router = useRouter()
@@ -14,7 +15,8 @@ function registerUser() {
   authService.register(firstName.value,mailAddress.value,password.value,selectedOption.value,parrainage.value)
     .then(() => {
       enregistrer()
-    }).catch(() => {
+    }).catch((err:Error) => {
+      toast.error(err.message)
       console.log("erreur")
     })
 }

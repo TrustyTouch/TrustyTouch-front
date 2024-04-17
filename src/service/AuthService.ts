@@ -15,7 +15,8 @@ export default class {
             }
         }).then(async (res) => {
             if (!res.ok) {
-                throw new Error("Impossible d'enregistrer l'utilisateur")
+                const error = await res.json()
+                throw new Error(error.message||error.error)
             }
             return await res.json()
         })
