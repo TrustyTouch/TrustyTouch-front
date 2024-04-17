@@ -27,5 +27,7 @@ const vuetify = createVuetify({
 })
 
 import router from "./plugins/router";
+import Vue3Toastify from 'vue3-toastify'
+import options from './plugins/toastify'
 
-createApp(App).use(vuetify).use(router).mount('#app')
+createApp(App).use(vuetify).use(router).use(Vue3Toastify, options).mount('#app')
