@@ -29,5 +29,6 @@ const vuetify = createVuetify({
 import router from "./plugins/router";
 import Vue3Toastify from 'vue3-toastify'
 import options from './plugins/toastify'
+import VueApexCharts from 'vue3-apexcharts'
 
-createApp(App).use(vuetify).use(router).use(Vue3Toastify, options).mount('#app')
+createApp(App).use(vuetify).use(router).use(Vue3Toastify, options).use(VueApexCharts).mount('#app')
