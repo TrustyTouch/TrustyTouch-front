@@ -86,6 +86,20 @@ export default class {
         })
     }
 
+    public getNotif(user_id: number): Promise<any> {
+        return fetch("http://localhost:5001/notifications/" + user_id, {
+            method: "GET",
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(async (res) => {
+            if (!res.ok) {
+                throw new Error("Impossible de trouver des notifications")
+            }
+            return (await res.json()).notifications
+        })
+    }
+
     public async updateService(id_service: number, titre: string, description: string, id_categorie: number, prix: number) {
         const res = await fetch(`http://localhost:5000/update_service/${id_service}`, {
             method: 'PUT',

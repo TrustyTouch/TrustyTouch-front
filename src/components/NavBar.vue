@@ -2,11 +2,14 @@
 import { computed, ref } from "vue"
 import { useRouter } from "vue-router"
 import { useJWT } from "../composables/jwt"
+import BackendService from '../service/Services'
 
 const menunotif = ref<boolean>(false)
 const menucompte = ref<boolean>(false)
 const router = useRouter()
 const id_role = computed(() => useJWT().decodedToken.value?.id_role)
+const user_id = computed(() => useJWT().decodedToken.value?.sub)
+const backendService = new BackendService()
 
 function accueil() {
   router.push({ name: "category" })
@@ -38,15 +41,19 @@ function createservice() {
 }
 
 interface Notif {
-    personne: string;
     titre: string;
+    date: Date;
 }
 
-const notifs = ref<Notif[]>([
-    {personne: "Prestataire 1", titre: "Nom du service..."},
-    {personne: "Prestataire 2", titre: "Nom du service..."},
-    {personne: "Prestataire 3", titre: "Nom du service..."}
-])
+const notifs = ref<Notif[]>([]);
+
+function updateNotif() {
+    backendService.getNotif(user_id.value!)
+    .then(notifications => {
+        notifs.value=notifications.map((notif:any)=>({titre:notif.message,date:notif.created_at}))
+    })
+}
+
 </script>
 
 <template>
@@ -59,14 +66,14 @@ const notifs = ref<Notif[]>([
                 <v-btn v-if="id_role! > 1" icon="mdi-plus-box" @click="createservice()"></v-btn>
                 <v-menu v-model="menunotif" :close-on-content-click="false" >
                     <template v-slot:activator="{ props }">
-                        <v-btn v-bind="props" icon="mdi-bell" ></v-btn>
+                        <v-btn v-bind="props" icon="mdi-bell" @click="updateNotif"></v-btn>
                     </template>
                     <v-card min-width="300">
                         <v-list>
                             <div v-for="notif in notifs" :key="notif.titre">
                                 <v-list-item
                                     :subtitle="notif.titre"
-                                    :title="notif.personne"
+                                    :date="notif.date"
                                 >
                                 </v-list-item>
                             </div>
